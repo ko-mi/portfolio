@@ -1,0 +1,183 @@
+.demoContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2xl);
+  padding: var(--spacing-xl) 0;
+}
+
+.optionSection {
+  margin-bottom: var(--spacing-2xl);
+}
+
+.optionTitle {
+  margin: 0 0 var(--spacing-lg);
+  font-size: 20px;
+  font-weight: var(--font-weight-normal);
+  color: var(--text);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.valueSection {
+  margin-bottom: 0;
+}
+
+.heading {
+  margin: 0 0 var(--spacing-md);
+  font-size: 28px;
+  font-weight: var(--font-weight-normal);
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+.intro {
+  margin: 0 0 var(--spacing-lg);
+  font-size: 18px;
+  color: var(--text);
+  font-weight: var(--font-weight-light);
+  line-height: 1.6;
+}
+
+.closing {
+  margin: var(--spacing-lg) 0 0;
+  font-size: 16px;
+  color: var(--muted);
+  font-weight: var(--font-weight-light);
+  font-style: italic;
+}
+
+/* Option 1: Simple List */
+.simpleList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--spacing-lg);
+}
+
+.listItem {
+  display: flex;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.listItem:last-child {
+  border-bottom: none;
+}
+
+.bullet {
+  flex-shrink: 0;
+  color: var(--text);
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.listText {
+  flex: 1;
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: var(--font-weight-light);
+  line-height: 1.6;
+}
+
+/* Option 2: Numbered List */
+.numberedList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--spacing-lg);
+  counter-reset: value-counter;
+}
+
+.numberedItem {
+  display: flex;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) 0;
+  counter-increment: value-counter;
+}
+
+.number {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: var(--font-weight-normal);
+}
+
+/* Option 3: Single Column */
+.singleColumn {
+  margin: 0 0 var(--spacing-lg);
+}
+
+.paragraphItem {
+  margin: 0 0 var(--spacing-lg);
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: var(--font-weight-light);
+  line-height: 1.7;
+}
+
+.paragraphItem:last-child {
+  margin-bottom: 0;
+}
+
+/* Option 4: Minimal with Background */
+.minimalContainer {
+  margin: 0 0 var(--spacing-lg);
+  padding: var(--spacing-lg);
+  background: rgba(10, 42, 41, 0.2);
+  border-radius: var(--border-radius);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.minimalItem {
+  margin-bottom: var(--spacing-md);
+}
+
+.minimalItem:last-child {
+  margin-bottom: 0;
+}
+
+.minimalText {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: var(--font-weight-light);
+  line-height: 1.7;
+}
+
+/* Option 5: Two Column Text */
+.twoColumnText {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--spacing-lg);
+  margin: 0 0 var(--spacing-lg);
+}
+
+.columnText {
+  margin: 0;
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: var(--font-weight-light);
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .twoColumnText {
+    grid-template-columns: 1fr;
+  }
+
+  .heading {
+    font-size: 24px;
+  }
+
+  .intro {
+    font-size: 17px;
+  }
+}
+
