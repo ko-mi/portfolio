@@ -8,7 +8,7 @@ interface HamburgerMenuProps {
 }
 
 const HamburgerMenu = ({ isOpen, onClose }: HamburgerMenuProps) => {
-  const menuRef = useRef<HTMLDivElement>(null);
+  const menuRef = useRef<HTMLElement>(null);
 
   // Close menu when clicking outside
   useEffect(() => {
@@ -24,6 +24,23 @@ const HamburgerMenu = ({ isOpen, onClose }: HamburgerMenuProps) => {
     }
   }, [isOpen, onClose]);
 
+  // Prevent focus from entering hidden menu
+  useEffect(() => {
+    if (!isOpen && menuRef.current) {
+      const focusableElements = menuRef.current.querySelectorAll(
+        'a, button, [tabindex]:not([tabindex="-1"])'
+      );
+      focusableElements.forEach((el) => {
+        (el as HTMLElement).setAttribute('tabindex', '-1');
+      });
+    } else if (isOpen && menuRef.current) {
+      const focusableElements = menuRef.current.querySelectorAll('[tabindex="-1"]');
+      focusableElements.forEach((el) => {
+        (el as HTMLElement).removeAttribute('tabindex');
+      });
+    }
+  }, [isOpen]);
+
   const handleLinkClick = (href: string, external: boolean = false) => {
     if (!external && href.startsWith('#')) {
       smoothScrollTo(href.substring(1));
@@ -33,7 +50,7 @@ const HamburgerMenu = ({ isOpen, onClose }: HamburgerMenuProps) => {
 
   const menuItems = [
     { label: 'Work', href: '#problems', external: false },
-    { label: 'About', href: '#value', external: false },
+    { label: 'How I help', href: '#value', external: false },
     { label: 'Writing', href: '#writing', external: false },
     { label: 'Contact', href: '#contact', external: false },
     { label: 'Resume', href: '#', external: true }, // Placeholder
@@ -48,6 +65,8 @@ const HamburgerMenu = ({ isOpen, onClose }: HamburgerMenuProps) => {
         ref={menuRef}
         className={`${styles.menu} ${isOpen ? styles.menuOpen : ''}`}
         aria-label="Main navigation"
+        aria-hidden={!isOpen}
+        hidden={!isOpen}
       >
         <ul className={styles.menuList}>
           {menuItems.map((item) => (

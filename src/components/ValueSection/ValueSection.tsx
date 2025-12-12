@@ -4,25 +4,25 @@ const ValueSection = () => {
   const valuePoints = [
     {
       id: '1',
-      text: 'Helping non-technical or semi-technical teams turn requirements into working systems',
+      text: 'Turn requirements into working web systems',
     },
     {
       id: '2',
-      text: 'Translating business goals into concrete architecture, not tool demos',
+      text: 'Translate business goals into architecture and implementation',
     },
     {
       id: '3',
-      text: 'Connecting CMS, forms, analytics, and integrations into one coherent setup',
+      text: 'Connect CMS, forms, analytics, and integrations into one coherent setup',
     },
     {
       id: '4',
-      text: 'Tool-agnostic by default — focused on fit, constraints, and maintainability',
+      text: 'Tool-agnostic by default. Focused on fit, constraints, and maintainability.',
     },
   ];
 
   return (
     <section className={styles.valueSection} id="value">
-      <h2 className={styles.heading}>What I do best</h2>
+      <h2 className={styles.heading}>How I help</h2>
       <p className={styles.intro}>
         Building for teams who know the goal, but need the system.
       </p>

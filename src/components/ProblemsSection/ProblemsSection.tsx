@@ -11,8 +11,8 @@ interface ProblemsSectionProps {
 const defaultProblems: ProblemCard[] = [
   {
     id: '1',
-    title: 'Marketing Website Migration to Framer + System Architecture',
-    description: 'Led the end-to-end migration of a legacy marketing site to Framer. Designed a scalable CMS and component architecture.',
+    title: 'Migrated a legacy marketing site to Framer — built a scalable content system',
+    description: 'Led an end-to-end migration from a legacy site to Framer. Built the CMS model and component system to scale new pages safely.',
     problem: 'Legacy website infrastructure was slow to iterate on, inconsistent in design structure, and required constant manual intervention.',
     solution: 'Led the end-to-end migration of the company website to Framer. Designed a scalable CMS architecture supporting dozens of page types. Built reusable custom Framer components + code overrides. Improved internal delivery velocity (marketing could ship pages without engineering). Set standards for accessibility, SEO baseline, and performance.',
     result: 'Page build time reduced from days to hours. Consistent design system adoption across the site. Significant reduction in engineering bottlenecks.',
@@ -68,18 +68,18 @@ const ProblemsSection = ({ problems = defaultProblems }: ProblemsSectionProps) =
     setSelectedCard(null);
   };
 
-  // Short tab names
+  // Short tab names - problem/outcome focused
   const tabNames = [
-    'Website Migration',
-    'CMS Modeling',
-    'Lead Funnel',
-    'Analytics',
-    'Collaboration',
+    'Migration',
+    'CMS & content systems',
+    'Lead flow',
+    'Analytics & tracking',
+    'Team workflows',
   ];
 
   return (
     <section className={styles.problemsSection} id="problems">
-      <h2 className={styles.heading}>Portfolio</h2>
+      <h2 className={styles.heading}>Selected work</h2>
       <div className={styles.tabbedLayout}>
         <div className={styles.tabs}>
           {problems.map((card, index) => (
