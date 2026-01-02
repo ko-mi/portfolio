@@ -41,11 +41,17 @@ const HamburgerMenu = ({ isOpen, onClose }: HamburgerMenuProps) => {
     }
   }, [isOpen]);
 
-  const handleLinkClick = (href: string, external: boolean = false) => {
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, external: boolean = false) => {
     if (!external && href.startsWith('#')) {
+      e.preventDefault();
       smoothScrollTo(href.substring(1));
+      onClose();
     }
-    onClose();
+    // For external links, let the browser handle navigation naturally
+    // Close menu immediately for external links too
+    if (external) {
+      onClose();
+    }
   };
 
   const menuItems = [
@@ -54,8 +60,8 @@ const HamburgerMenu = ({ isOpen, onClose }: HamburgerMenuProps) => {
     { label: 'Writing', href: '#writing', external: false },
     { label: 'Contact', href: '#contact', external: false },
     { label: 'Resume', href: '#', external: true }, // Placeholder
-    { label: 'GitHub', href: '#', external: true }, // Optional placeholder
-    { label: 'LinkedIn', href: '#', external: true }, // Optional placeholder
+    { label: 'GitHub', href: 'https://github.com/ko-mi', external: true },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/michalina-ko/', external: true },
   ];
 
   return (
@@ -74,8 +80,7 @@ const HamburgerMenu = ({ isOpen, onClose }: HamburgerMenuProps) => {
               <a
                 href={item.href}
                 onClick={(e) => {
-                  e.preventDefault();
-                  handleLinkClick(item.href, item.external);
+                  handleLinkClick(e, item.href, item.external);
                 }}
                 className={styles.menuLink}
                 {...(item.external && { target: '_blank', rel: 'noopener noreferrer' })}

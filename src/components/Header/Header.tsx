@@ -32,7 +32,10 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.headerContent}>
-        <span className={styles.brand}>Michalina Kowalczyk</span>
+        <div className={styles.brandContainer}>
+          <span className={styles.brand}>MICHALINA</span>
+          <span className={styles.brand}>KOWALCZYK</span>
+        </div>
         <button
           className={styles.hamburger}
           onClick={() => setIsMenuOpen(!isMenuOpen)}
