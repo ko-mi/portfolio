@@ -12,9 +12,12 @@ dist
 dist-ssr
 *.local
 
+portfolio-fullstack.code-workspace
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
+.cursor/*
 .idea
 .DS_Store
 *.suo
