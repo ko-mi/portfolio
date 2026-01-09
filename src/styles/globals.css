@@ -21,7 +21,8 @@
   --spacing-2xl: 80px;
   
   /* Typography */
-  --font-family: "Space Grotesk", sans-serif;
+  /* Fallback; overridden by next/font via --font-family on <html> */
+  --font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   --font-weight-light: 200;
   --font-weight-normal: 300;
   --font-weight-medium: 400;
