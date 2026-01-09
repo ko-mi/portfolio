@@ -1,6 +1,6 @@
 # Portfolio Site
 
-A modern, minimal portfolio site built with React, TypeScript, and Vite.
+A modern, minimal portfolio site built with **Next.js**, React, and TypeScript.
 
 ## Features
 
@@ -16,9 +16,9 @@ A modern, minimal portfolio site built with React, TypeScript, and Vite.
 
 - React 18
 - TypeScript
-- Vite
+- Next.js (App Router)
 - CSS Modules
-- Space Grotesk font
+- Inter font (via `next/font`)
 
 ## Development
 
@@ -32,13 +32,17 @@ npm run dev
 # Build for production
 npm run build
 
-# Preview production build
-npm run preview
+# Run production server locally (after build)
+npm run start
 ```
 
 ## Deployment
 
-This project is configured for Vercel deployment. Simply connect your repository to Vercel and it will auto-detect the Vite configuration.
+This project is configured for Vercel deployment. Connect your repository to Vercel and it will auto-detect the **Next.js** configuration.
+
+## Migration notes
+
+See [`docs/nextjs-migration-workflow.md`](docs/nextjs-migration-workflow.md) for what changed in the Vite → Next.js migration and how it affects day-to-day workflow.
 
 ## Future CMS Integration
 

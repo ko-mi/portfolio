@@ -3,6 +3,7 @@ export interface ProblemCard {
   title: string;
   description: string;
   techStack?: string[]; // Array of tech names (e.g., ['Vercel', 'Framer', 'Hubspot'])
+  tabLabel?: string;
   // Modal content
   problem?: string;
   solution?: string;
