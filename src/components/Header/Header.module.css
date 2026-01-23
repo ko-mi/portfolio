@@ -9,6 +9,7 @@
 }
 
 .headerContent {
+  position: relative;
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 14px var(--spacing-md);
@@ -107,12 +108,12 @@
 }
 
 .menu {
-  position: fixed;
-  top: 60px;
-  right: 18px;
+  position: absolute;
+  top: calc(100% + 8px);
+  right: var(--spacing-md);
   z-index: 12;
   width: 200px;
-  background: var(--card);
+  background: rgba(10, 42, 41, 0.98);
   backdrop-filter: var(--backdrop-blur);
   -webkit-backdrop-filter: var(--backdrop-blur);
   border-radius: var(--border-radius);
@@ -176,8 +177,8 @@
   }
 
   .menu {
-    right: 12px;
-    width: calc(100vw - 24px);
+    right: var(--spacing-md);
+    width: calc(100vw - calc(var(--spacing-md) * 2));
     max-width: 280px;
   }
 }
