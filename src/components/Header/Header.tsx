@@ -48,8 +48,8 @@ const Header = () => {
             <span className={isMenuOpen ? styles.open : ''}></span>
           </span>
         </button>
+        <HamburgerMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
       </div>
-      <HamburgerMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </header>
   );
 };

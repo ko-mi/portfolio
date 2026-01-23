@@ -55,11 +55,9 @@ const HamburgerMenu = ({ isOpen, onClose }: HamburgerMenuProps) => {
   };
 
   const menuItems = [
-    { label: 'Work', href: '#problems', external: false },
     { label: 'How I help', href: '#value', external: false },
-    { label: 'Writing', href: '#writing', external: false },
+    { label: 'Featured work', href: '#problems', external: false },
     { label: 'Contact', href: '#contact', external: false },
-    { label: 'Resume', href: '#', external: true }, // Placeholder
     { label: 'GitHub', href: 'https://github.com/ko-mi', external: true },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/michalina-ko/', external: true },
   ];
