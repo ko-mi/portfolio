@@ -27,3 +27,20 @@ portfolio-fullstack.code-workspace
 *.sln
 *.sw?
 
+# Cursor / IDE project state
+.cursor/
+
+# Next.js build output
+.next/
+out/
+
+# Vercel local config
+.vercel/
+
+# Environment variables / secrets
+.env
+.env.*
+!.env.example
+
+# Optional: test/coverage artifacts
+coverage/
