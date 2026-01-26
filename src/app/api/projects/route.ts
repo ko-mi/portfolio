@@ -1,20 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { ProblemCard } from '@/types';
-
-type StrapiProject = {
-  id: number;
-  documentId: string;
-  title: string;
-  tabLabel?: string;
-  description?: string;
-  problem?: string;
-  solution?: string;
-  result?: string;
-  techStack?: string[];
-  sortOrder?: number;
-  slug?: string;
-  publishedAt?: string | null;
-};
+import type { StrapiProject } from '@/services/strapi';
 
 /**
  * Server-side Route Handler for fetching projects from Strapi.

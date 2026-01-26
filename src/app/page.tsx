@@ -1,6 +1,7 @@
 import App from '../App';
 import { defaultProblems } from '../content/defaultProblems';
 import type { ProblemCard } from '../types';
+import type { StrapiProject } from '../services/strapi';
 
 // Enable ISR: regenerate page every 5 minutes
 export const revalidate = 300;
@@ -43,7 +44,7 @@ async function getProjects(): Promise<ProblemCard[]> {
     }
 
     // Transform Strapi response to ProblemCard format
-    const projects: ProblemCard[] = data.map((p: any) => ({
+    const projects: ProblemCard[] = (data as StrapiProject[]).map((p) => ({
       id: String(p.sortOrder ?? p.id),
       title: p.title,
       tabLabel: p.tabLabel,

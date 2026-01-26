@@ -45,7 +45,7 @@ Environments: ✅ Production  ✅ Preview  ✅ Development
 
 ```
 Name:  STRAPI_API_TOKEN
-Value: 644d75bf4f444cc087c3f3ffae3e0826498a86f0662c4ddc7dcb9a5f012534e4cd4d366ec76fb4903d717396939fba10c92eb5d37c45b616b13bfcf2bafa7a8ee3d9cdde396833b02d3a8df1faae9cf0f15603f1b5c694142cf7581c1664e72acea774b91d05a33aaef047b85c14452a9c5240be3dfa7cacb1e726e509e53ed7
+Value: MY_STRAPI_TOKEN
 Environments: ✅ Production  ✅ Preview  ✅ Development
 ```
 

@@ -6,8 +6,12 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'next/core-web-vitals',
   ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  ignorePatterns: ['dist', '.eslintrc.cjs', '.next'],
   parser: '@typescript-eslint/parser',
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
   rules: {},
 }
 
