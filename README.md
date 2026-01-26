@@ -206,74 +206,16 @@ Prevents entire app from crashing if one component fails.
 
 ## Deployment
 
-### Vercel (Frontend)
+This project is configured for deployment on Vercel with automatic deployments from the main branch.
 
-**Prerequisites:**
-1. Connect GitHub repository to Vercel
-2. Add environment variables in Vercel dashboard:
-   - `STRAPI_URL` = `https://cms.michalina.dev`
-   - `STRAPI_API_TOKEN` = Your read-only token
+### Environment Variables
 
-**Deploy:**
-```bash
-# Automatic on push to main branch
-git push origin main
+Configure the following environment variables in your hosting platform:
 
-# Or deploy manually
-vercel --prod
-```
+- `STRAPI_URL` - Your Strapi CMS URL
+- `STRAPI_API_TOKEN` - Read-only API token for Strapi
 
-### Environment Variables (Vercel)
-
-Add these in **Project Settings → Environment Variables**:
-- Apply to: **Production**, **Preview**, **Development**
-- Do NOT use `NEXT_PUBLIC_` prefix
-
----
-
-## Testing
-
-### Manual Testing Checklist
-
-1. **Server-Side Rendering:**
-   - View page source → Should see actual content in HTML
-
-2. **Security:**
-   - Open DevTools → Network tab
-   - Should see ZERO requests to cms.michalina.dev
-   - Console: `console.log(process.env.STRAPI_API_TOKEN)` → `undefined`
-
-3. **ISR Caching:**
-   - First load: ~500ms (fetches from CMS)
-   - Refresh: <50ms (serves from cache)
-
-4. **Fallback Behavior:**
-   - If CMS down → Site still works with default content
-
----
-
-## Documentation
-
-### Comprehensive Guides
-
-- **[AUDIT_REPORT.md](docs/AUDIT_REPORT.md)** - Complete technical audit and recommendations
-- **[PHASE_6_FRONTEND_INTEGRATION.md](docs/PHASE_6_FRONTEND_INTEGRATION.md)** - SSR implementation details
-- **[PHASE_7_DEPLOYMENT.md](docs/PHASE_7_DEPLOYMENT.md)** - Production deployment guide
-- **[PHASE_7_VERIFICATION_CHECKLIST.md](docs/PHASE_7_VERIFICATION_CHECKLIST.md)** - Testing procedures
-
-### Component Documentation
-
-Key components include JSDoc comments with usage examples:
-```typescript
-/**
- * Custom hook to lock/unlock body scroll.
- * @param lock - Whether to lock the body scroll
- * @example
- * ```tsx
- * useBodyScrollLock(isMenuOpen);
- * ```
- */
-```
+**Important:** Do NOT use `NEXT_PUBLIC_` prefix - these are server-only variables that should never be exposed to the browser.
 
 ---
 
@@ -293,36 +235,14 @@ Key components include JSDoc comments with usage examples:
 
 ---
 
-## Maintenance
-
-### Weekly Checks
-- Monitor Vercel analytics
-- Check for console errors
-- Verify CMS connectivity
-
-### Monthly Updates
-```bash
-# Update dependencies
-npm outdated
-npm update
-
-# Run security audit
-npm audit
-
-# Test locally
-npm run build && npm start
-```
-
----
-
 ## Troubleshooting
 
 ### Issue: Site shows default content instead of CMS data
 
 **Check:**
 1. Verify `.env.local` has correct `STRAPI_URL` and `STRAPI_API_TOKEN`
-2. Test token: `curl https://cms.michalina.dev/api/projects -H "Authorization: Bearer YOUR_TOKEN"`
-3. Check dev server logs for errors
+2. Check dev server logs for errors
+3. Ensure environment variables are set correctly in your deployment platform
 
 ### Issue: TypeScript errors after changes
 
@@ -334,8 +254,8 @@ npm run build
 
 ### Issue: Changes not appearing in production
 
-- Wait 5 minutes (ISR cache revalidation)
-- Or trigger redeploy in Vercel
+- Wait for ISR cache revalidation (configured revalidation time)
+- Or trigger a redeploy in your hosting platform
 
 ---
 

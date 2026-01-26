@@ -44,3 +44,10 @@ out/
 
 # Optional: test/coverage artifacts
 coverage/
+
+# ====================================
+# PRIVATE DOCUMENTATION (Do not publish)
+# ====================================
+# Internal development, deployment, audit, and planning documentation
+# All private/internal docs are kept in docs/implementation/ directory
+/docs/implementation/
