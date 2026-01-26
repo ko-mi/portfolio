@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { ProblemCard } from '../../types';
+import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
 import styles from './Modal.module.css';
 
 interface ModalProps {
@@ -8,16 +9,8 @@ interface ModalProps {
 }
 
 const Modal = ({ card, onClose }: ModalProps) => {
-  useEffect(() => {
-    if (card) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [card]);
+  // Prevent body scroll when modal is open
+  useBodyScrollLock(!!card);
 
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {

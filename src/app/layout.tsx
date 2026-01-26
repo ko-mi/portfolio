@@ -5,6 +5,7 @@ import '../styles/globals.css';
 
 export const metadata: Metadata = {
   title: 'Michalina Kowalczyk - Portfolio',
+  description: 'Growth-focused web infrastructure for SaaS teams. Portfolio of Michalina Kowalczyk.',
 };
 
 const inter = Inter({

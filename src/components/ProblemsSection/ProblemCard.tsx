@@ -87,7 +87,13 @@ const illustrations = {
 };
 
 const ProblemCard = ({ problem, onClick }: ProblemCardProps) => {
-  const illustration = illustrations[problem.id as keyof typeof illustrations];
+  // Safely get illustration with fallback to first illustration if ID doesn't exist
+  const getIllustration = (id: string) => {
+    const illustrationId = id as keyof typeof illustrations;
+    return illustrations[illustrationId] || illustrations['1'];
+  };
+  
+  const illustration = getIllustration(problem.id);
   
   return (
     <article 

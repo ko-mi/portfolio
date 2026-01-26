@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import HamburgerMenu from './HamburgerMenu';
+import { useBodyScrollLock } from '../../hooks/useBodyScrollLock';
 import styles from './Header.module.css';
 
 const Header = () => {
@@ -18,16 +19,7 @@ const Header = () => {
   }, [isMenuOpen]);
 
   // Prevent body scroll when menu is open
-  useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [isMenuOpen]);
+  useBodyScrollLock(isMenuOpen);
 
   return (
     <header className={styles.header}>

@@ -1,11 +1,14 @@
 import { NextResponse } from 'next/server';
-import type { ProblemCard } from '@/types';
-import type { StrapiProject } from '@/services/strapi';
+import { transformStrapiProjects } from '@/utils/transformStrapiProjects';
+import { StrapiResponseSchema } from '@/utils/strapiValidation';
 
 /**
- * Server-side Route Handler for fetching projects from Strapi.
+ * Server-side Route Handler for fetching projects from Strapi with runtime validation.
  * This endpoint is called internally by Next.js server components.
  * The API token never reaches the browser.
+ * 
+ * NOTE: Currently unused - data is fetched directly in page.tsx for SSR.
+ * This route exists for future client-side fetching needs if required.
  */
 export async function GET() {
   const strapiUrl = process.env.STRAPI_URL;
@@ -52,27 +55,25 @@ export async function GET() {
     }
 
     const json = await response.json();
-    const data = Array.isArray(json) ? json : (json?.data ?? []);
 
-    if (!Array.isArray(data)) {
-      console.error('Unexpected response format from Strapi');
+    // Validate the response structure at runtime
+    const validationResult = StrapiResponseSchema.safeParse(json);
+
+    if (!validationResult.success) {
+      console.error('Invalid Strapi response format:', validationResult.error);
       return NextResponse.json(
         { error: 'Invalid CMS response format' },
         { status: 500 }
       );
     }
 
-    // Transform Strapi response to ProblemCard format
-    const projects: ProblemCard[] = (data as StrapiProject[]).map((p) => ({
-      id: String(p.sortOrder ?? p.id),
-      title: p.title,
-      tabLabel: p.tabLabel,
-      description: p.description ?? '',
-      problem: p.problem,
-      solution: p.solution,
-      result: p.result,
-      techStack: p.techStack,
-    }));
+    // Extract the data array from validated response
+    const data = Array.isArray(validationResult.data)
+      ? validationResult.data
+      : validationResult.data.data;
+
+    // Transform validated Strapi response to ProblemCard format
+    const projects = transformStrapiProjects(data);
 
     return NextResponse.json({ data: projects });
   } catch (error) {

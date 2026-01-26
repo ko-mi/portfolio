@@ -1,14 +1,15 @@
 import App from '../App';
 import { defaultProblems } from '../content/defaultProblems';
 import type { ProblemCard } from '../types';
-import type { StrapiProject } from '../services/strapi';
+import { transformStrapiProjects } from '../utils/transformStrapiProjects';
+import { StrapiResponseSchema } from '../utils/strapiValidation';
 
 // Enable ISR: regenerate page every 5 minutes
 export const revalidate = 300;
 
 /**
- * Server-side data fetching for projects.
- * Falls back to defaultProblems if CMS is unavailable.
+ * Server-side data fetching for projects with runtime validation.
+ * Falls back to defaultProblems if CMS is unavailable or data is invalid.
  */
 async function getProjects(): Promise<ProblemCard[]> {
   const strapiUrl = process.env.STRAPI_URL;
@@ -36,24 +37,27 @@ async function getProjects(): Promise<ProblemCard[]> {
     }
 
     const json = await response.json();
-    const data = Array.isArray(json) ? json : (json?.data ?? []);
 
-    if (!Array.isArray(data) || data.length === 0) {
+    // Validate the response structure at runtime
+    const validationResult = StrapiResponseSchema.safeParse(json);
+
+    if (!validationResult.success) {
+      console.error('Invalid Strapi response format:', validationResult.error);
+      return defaultProblems;
+    }
+
+    // Extract the data array from validated response
+    const data = Array.isArray(validationResult.data)
+      ? validationResult.data
+      : validationResult.data.data;
+
+    if (data.length === 0) {
       console.warn('No projects returned from CMS, using defaults');
       return defaultProblems;
     }
 
-    // Transform Strapi response to ProblemCard format
-    const projects: ProblemCard[] = (data as StrapiProject[]).map((p) => ({
-      id: String(p.sortOrder ?? p.id),
-      title: p.title,
-      tabLabel: p.tabLabel,
-      description: p.description ?? '',
-      problem: p.problem,
-      solution: p.solution,
-      result: p.result,
-      techStack: p.techStack,
-    }));
+    // Transform validated Strapi response to ProblemCard format
+    const projects = transformStrapiProjects(data);
 
     return projects;
   } catch (error) {
